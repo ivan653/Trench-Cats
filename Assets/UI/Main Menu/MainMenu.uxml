@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Main%20Menu/MainMenu.uss?fileID=7433441132597879392&amp;guid=cb889ba2f1bc0f22cb17253da25794ee&amp;type=3#MainMenu"/>
+    <ui:VisualElement style="flex-grow: 1; align-items: flex-start;">
+        <ui:VisualElement name="Container" style="flex-grow: 1; width: 50%; align-items: flex-start; justify-content: center; flex-shrink: 1; flex-direction: column;">
+            <ui:Button text="Host" name="HostButton" style="align-items: auto; width: 50%; height: 5%; white-space: pre; flex-shrink: 0; font-size: 20px;"/>
+            <ui:TextField label="Connection Code" placeholder-text="filler text" name="JoinCodeInput" style="justify-content: flex-start; height: 50px; width: 50%; font-size: 20px; -unity-text-align: middle-left; opacity: 1; visibility: visible; overflow: hidden;"/>
+            <ui:Label text="Label" name="StatusLabel" style="height: 50px; width: 50%; font-size: 30px;"/>
+            <ui:Button text="Connect" name="ConnectButton" style="align-items: auto; width: 50%; height: 5%; white-space: pre; flex-shrink: 0; font-size: 20px;"/>
+            <ui:Button text="Exit" name="ExitButton" style="align-items: auto; width: 50%; height: 5%; white-space: pre; flex-shrink: 0; font-size: 20px;"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

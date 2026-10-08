@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/End%20Screen/EndScreen.uss?fileID=7433441132597879392&amp;guid=525b5b6a8339be0c7bf60714d7ac3bd9&amp;type=3#EndScreen"/>
+    <ui:VisualElement name="ContentSlot" style="flex-grow: 1; justify-content: center; background-color: rgba(0, 0, 0, 0.376);">
+        <ui:Label text="Label" name="EndText" style="align-items: auto; font-size: 36px; background-size: 100% 100%; width: 50%; align-self: center; -unity-text-align: middle-center; align-content: flex-start; justify-content: flex-start; bottom: auto; position: relative; flex-direction: column;"/>
+        <ui:Button text="Menu" name="MenuButton" style="background-size: 100% 100%; width: 50%; align-self: center; height: 100px; font-size: 36px;"/>
+    </ui:VisualElement>
+</ui:UXML>

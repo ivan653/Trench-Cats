@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-color: rgb(43, 43, 43); -unity-background-image-tint-color: rgb(255, 255, 255); border-top-color: rgb(149, 149, 149); border-left-width: 1px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; border-left-color: rgb(149, 149, 149); border-right-color: rgb(149, 149, 149); border-bottom-color: rgb(149, 149, 149); background-size: 100% 50%; white-space: normal; flex-direction: row; flex-wrap: nowrap;">
+        <ui:VisualElement name="StatIcon" style="width: 50%; height: 100%; background-color: rgb(68, 68, 68); border-radius: 4px;"/>
+        <ui:Label name="Value" text="100g" style="color: rgb(255, 215, 0); font-size: 20px; -unity-text-align: middle-center; height: 100%; width: 50%;"/>
+    </ui:VisualElement>
+</ui:UXML>

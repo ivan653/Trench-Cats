@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <ui:Button text="Button" name="AbilityButton" style="height: 150px; width: 150px; background-color: rgb(43, 43, 43);">
+        <ui:VisualElement name="AbilityIcon" style="width: 100%; height: 80%; background-color: rgb(68, 68, 68); border-radius: 4px;"/>
+        <ui:ProgressBar value="20" title="" name="ReloadingProgress" style="-unity-background-image-tint-color: rgb(255, 255, 255);"/>
+    </ui:Button>
+</ui:UXML>

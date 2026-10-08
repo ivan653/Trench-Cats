@@ -1,0 +1,24 @@
+{
+  "entities": [
+    {
+      "id": "factory",
+      "tags": ["selfAssembling"]
+    },
+    {
+      "id": "goldDeposits",
+      "tags": ["selfAssembling", "deposits"]
+    },
+    {
+      "id": "goldMine",
+      "tags": ["selfAssembling", "mine", "canPlaceOnBattlefield"]
+    },
+    {
+      "id": "trench",
+      "tags": ["canPlaceOnBattlefield"]
+    },
+    {
+      "id": "artillery",
+      "tags": ["ground", "mechanical", "heavy", "targetable_by_artillery"]
+    }
+  ]
+}
