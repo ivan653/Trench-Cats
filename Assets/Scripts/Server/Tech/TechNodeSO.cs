@@ -11,6 +11,7 @@ public class TechNodeSO : ScriptableObject
     [TextArea] public string description;
     public Sprite icon;
     public int cost;
+    public TechStatus status = TechStatus.Locked;
     public List<TechNodeSO> prerequisites;
-    public Vector2 gridPosition; // Координати на полотні (X, Y)
+    public Vector2Int gridPosition; // Координати на полотні (X, Y)
 }

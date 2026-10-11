@@ -1739,6 +1739,56 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!1 &1568909696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1568909697}
+  - component: {fileID: 1568909698}
+  m_Layer: 0
+  m_Name: Tech Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1568909697
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568909696}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1765408794}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1568909698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568909696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e1e2518034cfe52be9f279d686d674, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TechManager
+  ShowTopMostFoldoutHeaderGroup: 1
+  technologiesSO:
+  - {fileID: 11400000, guid: ae610b797d82c7683bfd537f9d21bdf3, type: 2}
+  - {fileID: 11400000, guid: 1f5ff0dec8b605536b8e11e09ec21b37, type: 2}
+  - {fileID: 11400000, guid: b8acc01d4fbb6ed1cbecb40abd11be4c, type: 2}
+  techPoints: 1
 --- !u!1 &1580201723
 GameObject:
   m_ObjectHideFlags: 0
@@ -2159,6 +2209,7 @@ Transform:
   - {fileID: 1552414693}
   - {fileID: 1809382795}
   - {fileID: 1849712877}
+  - {fileID: 1568909697}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1783506017
@@ -2416,16 +2467,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResearchTabController
   panelRenderer: {fileID: 1944061465}
-  researchElementAsset: {fileID: 9197481963319205126, guid: 9c664f5c1c0ac3292a7906ee70db143e, type: 3}
-  researches:
-  - {fileID: 11400000, guid: ae610b797d82c7683bfd537f9d21bdf3, type: 2}
-  - {fileID: 11400000, guid: 1f5ff0dec8b605536b8e11e09ec21b37, type: 2}
-  - {fileID: 11400000, guid: 1f5ff0dec8b605536b8e11e09ec21b37, type: 2}
-  - {fileID: 11400000, guid: 1f5ff0dec8b605536b8e11e09ec21b37, type: 2}
-  - {fileID: 11400000, guid: 1f5ff0dec8b605536b8e11e09ec21b37, type: 2}
-  - {fileID: 11400000, guid: 1f5ff0dec8b605536b8e11e09ec21b37, type: 2}
-  - {fileID: 11400000, guid: 1f5ff0dec8b605536b8e11e09ec21b37, type: 2}
-  - {fileID: 11400000, guid: 1f5ff0dec8b605536b8e11e09ec21b37, type: 2}
+  researchElementAsset: {fileID: 9197481963319205126, guid: 3a8ca727a8afcca8c908053de97a4c22, type: 3}
+  nodeWidth: 160
+  nodeHeight: 200
+  spacingX: 80
+  spacingY: 40
 --- !u!1 &1849712876
 GameObject:
   m_ObjectHideFlags: 0

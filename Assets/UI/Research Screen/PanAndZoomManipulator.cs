@@ -39,7 +39,7 @@ public class PanAndZoomManipulator : PointerManipulator
         {
             _isDragging = true;
             _startPointerPosition = evt.position;
-            _startTargetPosition = new Vector2(_target.transform.position.x, _target.transform.position.y);
+            _startTargetPosition = new Vector2(_target.resolvedStyle.translate.x, _target.resolvedStyle.translate.y);
             target.CapturePointer(evt.pointerId);
             evt.StopPropagation();
         }
@@ -50,7 +50,7 @@ public class PanAndZoomManipulator : PointerManipulator
         if (!_isDragging) return;
 
         Vector2 delta = (Vector2)evt.position - _startPointerPosition;
-        _target.transform.position = _startTargetPosition + delta;
+        _target.style.translate = _startTargetPosition + delta;
         evt.StopPropagation();
     }
 
@@ -68,7 +68,7 @@ public class PanAndZoomManipulator : PointerManipulator
     {
         float zoomDelta = -evt.delta.y * 0.05f;
         _currentZoom = Mathf.Clamp(_currentZoom + zoomDelta, MinZoom, MaxZoom);
-        _target.transform.scale = new Vector3(_currentZoom, _currentZoom, 1f);
+        _target.style.scale = new Vector3(_currentZoom, _currentZoom, 1f);
         evt.StopPropagation();
     }
 }
