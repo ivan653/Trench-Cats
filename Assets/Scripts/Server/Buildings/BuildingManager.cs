@@ -24,7 +24,7 @@ public class BuildingManager : NetworkBehaviour
     private Dictionary<string, float> buildingDurationDictionary = new();
 
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
-    public void PlaceBuildingServerRpc(ulong clientId, Vector2Int position, string buildingID, bool ignoreLimitations = false, RpcParams rpcParams = default)
+    public void PlaceBuildingServerRpc(ulong clientId, Vector2Int position, string buildingID, bool ignoreLimitations = false, bool instantBuilding = false, RpcParams rpcParams = default)
     {
         if(!buildingsList.Find(x => x.ID == buildingID)) return;
         
@@ -78,18 +78,25 @@ public class BuildingManager : NetworkBehaviour
             }
         }
         
-        
-        GameObject buildingProjectInstance = Instantiate(buildingProjectPrefab, new Vector3(position.x, position.y, 0), Quaternion.identity);
-        buildingProjectInstance.GetComponent<NetworkObject>().Spawn();
-
-        if(buildingProjectInstance.TryGetComponent(out BuildingProject project))
+        if(instantBuilding == false)
         {
-            if(TagsManager.Instance.GetTag(buildingID, Tag.SelfAssembling) != null)
-                project.Initialize(clientId, position, buildingID, buildingDurationDictionary[buildingID], true);
-            else
-                project.Initialize(clientId, position, buildingID, buildingDurationDictionary[buildingID], false);
+            GameObject buildingProjectInstance = Instantiate(buildingProjectPrefab, new Vector3(position.x, position.y, 0), Quaternion.identity);
+            buildingProjectInstance.GetComponent<NetworkObject>().Spawn();
 
-            project.onBuildCompleted += HandleBuildingComplete;
+            if(buildingProjectInstance.TryGetComponent(out BuildingProject project))
+            {
+                if(TagsManager.Instance.GetTag(buildingID, Tag.SelfAssembling) != null)
+                    project.Initialize(clientId, position, buildingID, buildingDurationDictionary[buildingID], true);
+                else
+                    project.Initialize(clientId, position, buildingID, buildingDurationDictionary[buildingID], false);
+
+                project.onBuildCompleted += HandleBuildingComplete;
+            }
+
+        }
+        else
+        {
+            HandleBuildingComplete(clientId, position, buildingID);
         }
 
         if(!ignoreLimitations)

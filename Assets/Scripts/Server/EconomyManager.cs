@@ -138,6 +138,8 @@ public class EconomyManager : NetworkBehaviour
         return -1f;
     }
 
+    
+
     [ClientRpc]
     private void NotifyFundsUpdatedClientRpc(float newValue, ClientRpcParams clientRpcParams = default)
     {

@@ -7,7 +7,7 @@ public class GoldMine : Building
 
     [SerializeField] private float productionTime = 5f;
     [SerializeField] private float productionAmount = 10f;
-    [SerializeField] private float currentProduction = 0;
+    [field:SerializeField] public float currentProduction {get; private set;} = 0;
     [SerializeField] private float storageSize = 100f;
 
 

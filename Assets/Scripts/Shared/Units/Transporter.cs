@@ -1,6 +1,6 @@
 using UnityEngine;
 using Unity.Netcode;
-using System;
+using System.Collections.Generic;
 
 public class Transporter : Unit
 {
@@ -8,22 +8,29 @@ public class Transporter : Unit
     [SerializeField] private Vector2 targetPosition;
     [SerializeField] private bool isLoaded = false;
     [SerializeField] private float currentCargo = 0;
+
     protected override void ExecuteBehavior()
     {   
+        // Логіка переміщення та економіки повинна виконуватися лише на сервері
+        if (!IsServer) return;
+
         position = transform.position;
 
-        if(!isLoaded)
+        if (!isLoaded)
         {
-            bool isMineFound = SearchForMines() != null;
+            GoldMine targetMine = SearchForMines();
 
-            if(isMineFound)
+            if (targetMine != null)
             {
-                if(Math.Abs(targetPosition.x - position.x) < 0.5)
-                    GetCargo();
+                if (Mathf.Abs(targetPosition.x - position.x) < 0.5f)
+                {
+                    GetCargo(targetMine);
+                    return;
+                }
                     
-                if(targetPosition.x > position.x && moveDirection.Value == Direction.Left)
+                if (targetPosition.x > position.x && moveDirection.Value == Direction.Left)
                     SwitchMoveDirection();
-                else if(targetPosition.x < position.x && moveDirection.Value == Direction.Right)
+                else if (targetPosition.x < position.x && moveDirection.Value == Direction.Right)
                     SwitchMoveDirection();
 
                 Move();
@@ -31,20 +38,22 @@ public class Transporter : Unit
         }
         else
         {
-
-            if(team.Value == Team.Blue)
+            if (team.Value == Team.Blue)
             {
                 if (position.x <= 0)
                 {
                     TakeCargo();
+                    return;
                 }
                 moveDirection.Value = Direction.Left;
             }
             else
             {
-                if (position.x >= MapManager.Instance.GetMapWidth()-1)
+                int mapEdge = MapManager.Instance.GetMapWidth() - 1;
+                if (position.x >= mapEdge)
                 {
                     TakeCargo();
+                    return;
                 }
                 moveDirection.Value = Direction.Right;
             }
@@ -61,23 +70,37 @@ public class Transporter : Unit
     private GoldMine SearchForMines()
     {
         var searchLine = MapManager.Instance.map[mapLine];
+        GoldMine bestMine = null;
+        float bestScore = float.MinValue;
 
-        for(int i = 0; i < searchLine.cells.Count; i++)
+        // Пошук за один прохід без виділення пам'яті під List
+        for (int i = 0; i < searchLine.cells.Count; i++)
         {
-            if(searchLine.cells[i].building != null && searchLine.cells[i].building.HasTag(Tag.Mine) && TeamsAllocation.Instance.GetTeam(searchLine.cells[i].building.ownerId.Value) == team.Value)
+            var cell = searchLine.cells[i];
+            if (cell.building != null && 
+                cell.building.HasTag(Tag.Mine) && 
+                TeamsAllocation.Instance.GetTeam(cell.building.ownerId.Value) == team.Value)
             {
-                targetPosition = searchLine.cells[i].position;
-                return (GoldMine)searchLine.cells[i].building;
+                if (cell.building is GoldMine mine)
+                {
+                    float dist = Mathf.Abs(position.x - cell.position.x);
+                    float score = mine.currentProduction - dist;
+
+                    if (score > bestScore)
+                    {
+                        bestScore = score;
+                        bestMine = mine;
+                        targetPosition = cell.position;
+                    }
+                }
             }
         }
 
-        return null;
+        return bestMine;
     }
 
-    private void GetCargo()
+    private void GetCargo(GoldMine mine)
     {
-        GoldMine mine = SearchForMines();
-        
         currentCargo = mine.UnloadStorage();
         isLoaded = true;
     }

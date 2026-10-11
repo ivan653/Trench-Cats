@@ -38,17 +38,19 @@ public class MatchManager : NetworkBehaviour
 
             AddFundsToAllPlayers(100);
             
-            BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.blueTeamClientId, new Vector2Int(0, 2), BuildingType.Factory, true);
-            BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.redTeamClientId, new Vector2Int(MapManager.Instance.GetMapWidth()-1, 2), BuildingType.Factory, true);
+            //BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.blueTeamClientId, new Vector2Int(0, 2), BuildingType.Factory, true);
+            //BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.redTeamClientId, new Vector2Int(MapManager.Instance.GetMapWidth()-1, 2), BuildingType.Factory, true);
 
-            BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.blueTeamClientId, new Vector2Int(2, 3), BuildingType.GoldDeposits, true);
-            BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.redTeamClientId, new Vector2Int(MapManager.Instance.GetMapWidth()-3, 3), BuildingType.GoldDeposits, true);
-            BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.blueTeamClientId, new Vector2Int(7, 2), BuildingType.GoldDeposits, true);
-            BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.redTeamClientId, new Vector2Int(MapManager.Instance.GetMapWidth()-8, 2), BuildingType.GoldDeposits, true);
-            BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.blueTeamClientId, new Vector2Int(9, 1), BuildingType.GoldDeposits, true);
-            BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.redTeamClientId, new Vector2Int(MapManager.Instance.GetMapWidth()-10, 4), BuildingType.GoldDeposits, true);
-            BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.blueTeamClientId, new Vector2Int(8, 4), BuildingType.GoldDeposits, true);
-            BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.redTeamClientId, new Vector2Int(MapManager.Instance.GetMapWidth()-9, 1), BuildingType.GoldDeposits, true);
+            BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.blueTeamClientId, new Vector2Int(2, 3), BuildingType.GoldMine, true, true);
+            BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.redTeamClientId, new Vector2Int(MapManager.Instance.GetMapWidth()-3, 3), BuildingType.GoldMine, true, true);
+
+
+            BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.blueTeamClientId, new Vector2Int(7, 2), BuildingType.GoldDeposits, true, true);
+            BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.redTeamClientId, new Vector2Int(MapManager.Instance.GetMapWidth()-8, 2), BuildingType.GoldDeposits, true, true);
+            BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.blueTeamClientId, new Vector2Int(9, 1), BuildingType.GoldDeposits, true, true);
+            BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.redTeamClientId, new Vector2Int(MapManager.Instance.GetMapWidth()-10, 4), BuildingType.GoldDeposits, true, true);
+            BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.blueTeamClientId, new Vector2Int(8, 4), BuildingType.GoldDeposits, true, true);
+            BuildingManager.Instance.PlaceBuildingServerRpc(TeamsAllocation.Instance.redTeamClientId, new Vector2Int(MapManager.Instance.GetMapWidth()-9, 1), BuildingType.GoldDeposits, true, true);
 
             matchStarted = true;
             Debug.Log("Match started and players spawned.");

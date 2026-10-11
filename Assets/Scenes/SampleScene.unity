@@ -2335,6 +2335,7 @@ GameObject:
   - component: {fileID: 1809382796}
   - component: {fileID: 1809382797}
   - component: {fileID: 1809382798}
+  - component: {fileID: 1809382799}
   m_Layer: 0
   m_Name: New UI
   m_TagString: Untagged
@@ -2402,6 +2403,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AbilityUIController
   abilitySlotTemplate: {fileID: 9197481963319205126, guid: ee576c82a9edaa5aabbfb7dc846856ba, type: 3}
   _panelRenderer: {fileID: 1944061465}
+--- !u!114 &1809382799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809382794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50653e04c0d4cb766ba03419cdccd433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResearchTabController
+  panelRenderer: {fileID: 1944061465}
+  researchElementAsset: {fileID: 9197481963319205126, guid: 9c664f5c1c0ac3292a7906ee70db143e, type: 3}
+  researches:
+  - {fileID: 11400000, guid: ae610b797d82c7683bfd537f9d21bdf3, type: 2}
+  - {fileID: 11400000, guid: 1f5ff0dec8b605536b8e11e09ec21b37, type: 2}
+  - {fileID: 11400000, guid: 1f5ff0dec8b605536b8e11e09ec21b37, type: 2}
+  - {fileID: 11400000, guid: 1f5ff0dec8b605536b8e11e09ec21b37, type: 2}
+  - {fileID: 11400000, guid: 1f5ff0dec8b605536b8e11e09ec21b37, type: 2}
+  - {fileID: 11400000, guid: 1f5ff0dec8b605536b8e11e09ec21b37, type: 2}
+  - {fileID: 11400000, guid: 1f5ff0dec8b605536b8e11e09ec21b37, type: 2}
+  - {fileID: 11400000, guid: 1f5ff0dec8b605536b8e11e09ec21b37, type: 2}
 --- !u!1 &1849712876
 GameObject:
   m_ObjectHideFlags: 0
@@ -2622,7 +2646,7 @@ PanelRenderer:
   m_MaskInteraction: 0
   serializedVersion: 1
   m_PanelSettings: {fileID: 11400000, guid: 831b1c9aa15440e1285f2df5e68d3e64, type: 2}
-  sourceAsset: {fileID: 9197481963319205126, guid: c5ce0e856a24e100ca3ea6b137a59f4a, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 6eba8b057ab1c79898846b28a169baf4, type: 3}
   m_ParentUI: {fileID: 0}
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
