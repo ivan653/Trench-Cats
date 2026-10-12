@@ -93,9 +93,16 @@ public class TechManager : NetworkBehaviour
         }
 
         Debug.Log("R");
-        currentTechnology.status = TechStatus.Researched;
-        UpdateTechTree(technologies);
+        HandleTechResearched(currentTechnology);
 
         researchTimer = 0;
+    }
+
+    private void HandleTechResearched(TechNode techNode)
+    {
+        techNode.status = TechStatus.Researched;
+        UpdateTechTree(technologies);
+
+        techNode.researchAction.Invoke();
     }
 }

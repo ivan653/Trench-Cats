@@ -16,8 +16,7 @@ public class BuildingManager : NetworkBehaviour
 
     [SerializeField]
     private GameObject buildingProjectPrefab;
-    //[SerializeField]
-    //private Dictionary<BuildingType, GameObject> buildingsDictionary = new();
+
     [SerializeField]
     private List<BuildingSO> buildingsList = new();
     [SerializeField]
@@ -28,7 +27,6 @@ public class BuildingManager : NetworkBehaviour
     {
         if(!buildingsList.Find(x => x.Id == buildingID)) return;
         
-        //clientId = rpcParams.Receive.SenderClientId;
         if(!ignoreLimitations)
         {
             bool isMine = TagsManager.Instance.GetTag(buildingID, Tag.Mine).IsNotNullOrEmpty();

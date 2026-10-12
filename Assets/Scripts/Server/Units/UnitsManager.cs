@@ -16,6 +16,7 @@ public class UnitsManager : NetworkBehaviour
     [SerializeField]
     private List<UnitSO> unitsList = new();
 
+
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
     public void PlaceUnitServerRpc(ulong clientId, Vector2Int position, string unitId)
     {
@@ -49,4 +50,9 @@ public class UnitsManager : NetworkBehaviour
         EconomyManager.Instance.ReduceFunds(clientId, unitsList.Find(x => x.Id == unitId).cost);
     }
 
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    public void AddUnitServerRpc(string unitId)
+    {
+        unitsList.Add(UnitsDB.Instance.GetUnitById(unitId));
+    }
 }

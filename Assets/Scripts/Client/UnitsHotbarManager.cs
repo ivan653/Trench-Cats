@@ -42,7 +42,6 @@ public class UnitsHotbarManager : MonoBehaviour
 
         string clickedId = elements[slotIndex].itemData.Id;
 
-        // Повторний клік по вже обраному юніту знімає виділення
         if (selectedUnitId == clickedId)
         {
             PlayerInputManager.Instance.DeselectAll();
@@ -57,5 +56,12 @@ public class UnitsHotbarManager : MonoBehaviour
     public void ClearSelection()
     {
         selectedUnitId = null;
+    }
+
+
+    public void AddUnitToHotbar(UnitSO unit)
+    {
+        elements.Add(new SlotData(){itemData = unit});
+        HotbarsUI.Instance.DrawHotbar(elements, true);
     }
 }

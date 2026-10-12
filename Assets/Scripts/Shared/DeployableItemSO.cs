@@ -12,10 +12,4 @@ public abstract class DeployableItemSO : ScriptableObject
     public Sprite sprite;
     public GameObject prefabToSpawn;
 
-    // Конкретний тип або категорія
-    public ItemCategory category;
-    
-    //[Header("Specific Type")]
-    //public UnitType unitType;       // Заповнюється, якщо це Unit
-    //public BuildingType buildingType; // Заповнюється, якщо це Building
 }

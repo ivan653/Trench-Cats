@@ -5,6 +5,7 @@ public class TechNode
 {
     public string id;
     public string techName;
+    public ResearchActionSO researchAction;
     public string description;
     public Sprite icon;
     public int cost;
@@ -15,6 +16,7 @@ public class TechNode
     {
         this.id = techNodeSO.id;
         this.techName = techNodeSO.techName;
+        this.researchAction = techNodeSO.researchAction;
         this.description = techNodeSO.description;
         this.icon = techNodeSO.icon;
         this.cost = techNodeSO.cost;

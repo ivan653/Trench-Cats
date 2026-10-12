@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TechNodeSO
   id: 
   techName: 
+  researchAction: {fileID: 11400000, guid: f50622d877e1aee18ad3dfe19c2f97b2, type: 2}
   description: 
   icon: {fileID: 0}
   cost: 3

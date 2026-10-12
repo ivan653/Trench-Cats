@@ -8,6 +8,7 @@ public class TechNodeSO : ScriptableObject
 {
     public string id;
     public string techName;
+    public ResearchActionSO researchAction;
     [TextArea] public string description;
     public Sprite icon;
     public int cost;
