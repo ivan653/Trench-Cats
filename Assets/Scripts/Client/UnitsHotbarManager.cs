@@ -6,7 +6,7 @@ public class UnitsHotbarManager : MonoBehaviour
     public static UnitsHotbarManager Instance { get; private set; }
 
     [field: SerializeField]
-    public UnitType selectedUnit { get; private set; } = UnitType.Null;
+    public string selectedUnitId { get; private set; }
 
     [SerializeField]
     private List<SlotData> elements = new();
@@ -40,22 +40,22 @@ public class UnitsHotbarManager : MonoBehaviour
     {
         if (slotIndex < 0 || slotIndex >= elements.Count) return;
 
-        UnitType clickedType = elements[slotIndex].itemData.unitType;
+        string clickedId = elements[slotIndex].itemData.Id;
 
         // Повторний клік по вже обраному юніту знімає виділення
-        if (selectedUnit == clickedType)
+        if (selectedUnitId == clickedId)
         {
             PlayerInputManager.Instance.DeselectAll();
             return;
         }
 
         BuildingsHotbarManager.Instance.ClearSelection();
-        selectedUnit = clickedType;
+        selectedUnitId = clickedId;
         PlayerInputManager.Instance.SetInputMode(InputMode.Placing);
     }
 
     public void ClearSelection()
     {
-        selectedUnit = UnitType.Null;
+        selectedUnitId = null;
     }
 }

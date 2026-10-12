@@ -17,8 +17,10 @@ public class UnitsManager : NetworkBehaviour
     private List<UnitSO> unitsList = new();
 
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
-    public void PlaceUnitServerRpc(ulong clientId, Vector2Int position, UnitType unitType)
+    public void PlaceUnitServerRpc(ulong clientId, Vector2Int position, string unitId)
     {
+        if(!unitsList.Find(x => x.Id == unitId)) return;
+        
         if (TeamsAllocation.Instance.blueTeamClientId == clientId && !TeamsAllocation.Instance.blueTeamBaseZone.IsFitsInZone(position))
         {
             Debug.Log($"Client {clientId} is trying to place a building in the restricted area.");
@@ -29,13 +31,13 @@ public class UnitsManager : NetworkBehaviour
             return;
         }
 
-        if (EconomyManager.Instance.GetFunds(clientId) < unitsList.Find(x => x.unitType == unitType).cost)
+        if (EconomyManager.Instance.GetFunds(clientId) < unitsList.Find(x => x.Id == unitId).cost)
         {
             Debug.Log($"Client {clientId} does not have enough funds to place a unit.");
             return;
         }
 
-        GameObject unitInstance = Instantiate(unitsList.Find(x => x.unitType == unitType).prefabToSpawn, new Vector3(position.x, position.y, 0), Quaternion.identity);
+        GameObject unitInstance = Instantiate(unitsList.Find(x => x.Id == unitId).prefabToSpawn, new Vector3(position.x, position.y, 0), Quaternion.identity);
         unitInstance.GetComponent<NetworkObject>().Spawn();
         if(unitInstance.TryGetComponent<Unit>(out Unit unit))
         {
@@ -44,7 +46,7 @@ public class UnitsManager : NetworkBehaviour
                 TeamsAllocation.Instance.blueTeamClientId == clientId ? Direction.Right : Direction.Left);
         }
 
-        EconomyManager.Instance.ReduceFunds(clientId, unitsList.Find(x => x.unitType == unitType).cost);
+        EconomyManager.Instance.ReduceFunds(clientId, unitsList.Find(x => x.Id == unitId).cost);
     }
 
 }

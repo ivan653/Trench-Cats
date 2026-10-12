@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038b7f4c641afb544a41959089df1d85, type: 3}
   m_Name: AssaultRifleCat
   m_EditorClassIdentifier: Assembly-CSharp::UnitSO
+  <Id>k__BackingField: assaultRifleCat
   itemName: 
   cost: 25
   sprite: {fileID: 0}
   prefabToSpawn: {fileID: 2108440180163221447, guid: 4fa9e71cb717c7235aebd17afd34df1f, type: 3}
   category: 1
-  unitType: 2
-  buildingType: 0

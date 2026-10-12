@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038b7f4c641afb544a41959089df1d85, type: 3}
   m_Name: Transporter
   m_EditorClassIdentifier: Assembly-CSharp::UnitSO
-  <ID>k__BackingField: 
+  <Id>k__BackingField: transporter
   itemName: 
   cost: 0
   sprite: {fileID: 0}
   prefabToSpawn: {fileID: 2108440180163221447, guid: a7a65909f1bb08dcc81d15a38a258cd0, type: 3}
   category: 1
-  unitType: 3

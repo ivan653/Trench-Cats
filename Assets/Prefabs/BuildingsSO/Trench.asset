@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 723ffcd005a00e3b197386f604c8ffc2, type: 3}
   m_Name: Trench
   m_EditorClassIdentifier: Assembly-CSharp::BuildingSO
-  <ID>k__BackingField: trench
+  <Id>k__BackingField: trench
   itemName: trench
   cost: 50
   sprite: {fileID: 0}
   prefabToSpawn: {fileID: 2108440180163221447, guid: 800e7f215de84525ebe1bc615e50abf5, type: 3}
   category: 0
-  unitType: 0

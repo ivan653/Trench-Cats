@@ -23,7 +23,9 @@ public class ResearchTabController : MonoBehaviour
 
     // Кеш стану та черги
     private bool _isUIReloaded = false;
+    private bool _isFirstUpdate = true;
     private List<TechNode> _cachedTechnologies;
+    private List<TechNodeUI> _techologiesUI = new();
 
     private void Awake()
     {
@@ -36,6 +38,13 @@ public class ResearchTabController : MonoBehaviour
     private void OnUIReload(PanelRenderer renderer, VisualElement root, int version)
     {
         techTree = root.Q<VisualElement>("TechTree");
+
+        if (techTree == null)
+        {
+            //Debug.LogError("TechTree VisualElement not found in the UI document.");
+            return;
+        }
+
         techTree.Clear();
 
         techTree.AddManipulator(new CustomManipulator());
@@ -111,8 +120,18 @@ public class ResearchTabController : MonoBehaviour
                 }
             }
 
+            var button = nodeElement.Q<Button>("Button");
+
+            button.clicked += () => TechManager.Instance.SelectTechnology(tech);
+
+
             techTree.Add(nodeElement);
+
+            if(_isFirstUpdate)
+                _techologiesUI.Add(new TechNodeUI(technologies[i].id, nodeElement));
         }
+
+        _isFirstUpdate = false;
     }
 
     private void DrawConnections(List<TechNode> technologies)
@@ -140,6 +159,13 @@ public class ResearchTabController : MonoBehaviour
                 linesContainer.Add(line);
             }
         }
+    }
+
+    public void UpdateTechNodeProgressBar(string techId, float progress)
+    {
+        var techUI = _techologiesUI.Find(x => x.techId == techId);
+        if(techUI != null)
+            techUI.UpdateProgress(progress);
     }
 
     private Vector2 GridToPixelPosition(Vector2Int grid)

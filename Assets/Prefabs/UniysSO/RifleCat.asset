@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038b7f4c641afb544a41959089df1d85, type: 3}
   m_Name: RifleCat
   m_EditorClassIdentifier: Assembly-CSharp::UnitSO
+  <Id>k__BackingField: rifleCat
   itemName: 
   cost: 20
   sprite: {fileID: 0}
   prefabToSpawn: {fileID: 2108440180163221447, guid: 9d11f19ad9f58235882d21b7c59ff075, type: 3}
   category: 1
-  unitType: 1
-  buildingType: 0

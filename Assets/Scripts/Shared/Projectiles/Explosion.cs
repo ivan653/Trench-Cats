@@ -1,50 +1,56 @@
-using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
 public class Explosion : NetworkBehaviour
 {
     [SerializeField] private int damage = 50;
-    [SerializeField] private LayerMask targetLayer; // Шар противників (Enemy / Units)
-    [SerializeField] private float destroyingTime = 1;
-    private float timer = 0;
-    
-    // Розмір зони ураження у світових одиницях (наприклад, 1x1 для одного тайла)
-    [SerializeField] private Vector2 tileSize = new Vector2(1f, 1f); 
+    [SerializeField] private LayerMask targetLayer;
+    [SerializeField] private float destroyingTime = 1f;
+    [SerializeField] private Vector2 tileSize = new Vector2(1f, 1f);
+
+    private Team sourceTeam;
+    private float timer = 0f;
+
+    public void Initialize(Team team)
+    {
+        this.sourceTeam = team;
+    }
 
     public override void OnNetworkSpawn()
     {
-        // Шкоду наносить тільки сервер одразу при спавні
         if (!IsServer) return;
 
         ApplyDamage();
-        //Destroy(gameObject);
     }
-
 
     private void ApplyDamage()
     {
-        // Знаходимо всі колайдери в межах тайлу довкола позиції вибуху
         Collider2D[] hitColliders = Physics2D.OverlapBoxAll(
             transform.position, 
             tileSize, 
-            0f 
-            //targetLayer
+            0f
+            // targetLayer // Можна розкоментувати при налаштованих шарах
         );
 
         foreach (var col in hitColliders)
         {
-            if (col.TryGetComponent(out Unit target))
+            if (col.TryGetComponent<Unit>(out var target))
             {
-                target.TakeDamage(damage, DamageType.Explosive);
+                // Наносимо шкоду лише якщо юніт належить ворожій команді
+                //if (target.team.Value != sourceTeam)
+                //{
+                    target.TakeDamage(damage, DamageType.Explosive);
+                //}
             }
         }
     }
 
-    void Update()
+    private void Update()
     {
+        if (!IsServer) return;
+
         timer += Time.deltaTime;
-        if(timer >= destroyingTime)
+        if (timer >= destroyingTime)
         {
             Destroy(gameObject);
         }

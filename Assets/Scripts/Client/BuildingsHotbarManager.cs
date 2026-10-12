@@ -40,7 +40,7 @@ public class BuildingsHotbarManager : MonoBehaviour
     {
         if (slotIndex < 0 || slotIndex >= elements.Count) return;
 
-        string clickedID = elements[slotIndex].itemData.ID;
+        string clickedID = elements[slotIndex].itemData.Id;
 
         if (selectedBuildingID == clickedID)
         {

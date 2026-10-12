@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 723ffcd005a00e3b197386f604c8ffc2, type: 3}
   m_Name: GoldMine
   m_EditorClassIdentifier: Assembly-CSharp::BuildingSO
-  <ID>k__BackingField: goldMine
+  <Id>k__BackingField: goldMine
   itemName: 
   cost: 100
   sprite: {fileID: 0}
   prefabToSpawn: {fileID: 2108440180163221447, guid: 4b9129eac340df05a9e6e3a1cdf1e9be, type: 3}
   category: 0
-  unitType: 0

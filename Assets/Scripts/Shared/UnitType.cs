@@ -1,7 +1,7 @@
-public enum UnitType
+/*public enum UnitType
 {
     Null,
     RifleCat,
     AssaultRifleCat,
     Transporter
-}
+}*/

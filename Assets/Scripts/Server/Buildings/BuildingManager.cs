@@ -26,7 +26,7 @@ public class BuildingManager : NetworkBehaviour
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
     public void PlaceBuildingServerRpc(ulong clientId, Vector2Int position, string buildingID, bool ignoreLimitations = false, bool instantBuilding = false, RpcParams rpcParams = default)
     {
-        if(!buildingsList.Find(x => x.ID == buildingID)) return;
+        if(!buildingsList.Find(x => x.Id == buildingID)) return;
         
         //clientId = rpcParams.Receive.SenderClientId;
         if(!ignoreLimitations)
@@ -46,7 +46,7 @@ public class BuildingManager : NetworkBehaviour
                 return;
             }
 
-            if (EconomyManager.Instance.GetFunds(clientId) < buildingsList.Find(x => x.ID == buildingID).cost)
+            if (EconomyManager.Instance.GetFunds(clientId) < buildingsList.Find(x => x.Id == buildingID).cost)
             {
                 Debug.Log($"Client {clientId} does not have enough funds to place a unit.");
                 return;
@@ -100,14 +100,14 @@ public class BuildingManager : NetworkBehaviour
         }
 
         if(!ignoreLimitations)
-            EconomyManager.Instance.ReduceFunds(clientId, buildingsList.Find(x => x.ID == buildingID).cost);
+            EconomyManager.Instance.ReduceFunds(clientId, buildingsList.Find(x => x.Id == buildingID).cost);
     }
 
     private void HandleBuildingComplete(ulong clientId, Vector2Int position, string buildingID)
     {
-        if (!buildingsList.Find(x => x.ID == buildingID)) return;
+        if (!buildingsList.Find(x => x.Id == buildingID)) return;
 
-        GameObject building = Instantiate(buildingsList.Find(x => x.ID == buildingID).prefabToSpawn, new Vector3(position.x, position.y, 0), Quaternion.identity);
+        GameObject building = Instantiate(buildingsList.Find(x => x.Id == buildingID).prefabToSpawn, new Vector3(position.x, position.y, 0), Quaternion.identity);
         var netObj = building.GetComponent<NetworkObject>();
         
         // Спавнимо з урахуванням прав власника

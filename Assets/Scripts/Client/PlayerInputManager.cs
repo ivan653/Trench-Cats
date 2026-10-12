@@ -90,9 +90,9 @@ public class PlayerInputManager : MonoBehaviour
         switch (currentInputMode)
         {
             case InputMode.Placing:
-                if (HotbarsUI.Instance.IsUnitsHotbarSelected && UnitsHotbarManager.Instance.selectedUnit != UnitType.Null)
+                if (HotbarsUI.Instance.IsUnitsHotbarSelected && UnitsHotbarManager.Instance.selectedUnitId != null)
                 {
-                    UnitPlacer.Instance.PlaceUnit(UnitsHotbarManager.Instance.selectedUnit);
+                    UnitPlacer.Instance.PlaceUnit(UnitsHotbarManager.Instance.selectedUnitId);
                 }
                 else if (!HotbarsUI.Instance.IsUnitsHotbarSelected && BuildingsHotbarManager.Instance.selectedBuildingID != null && BuildingsHotbarManager.Instance.selectedBuildingID != "")
                 {

@@ -17,7 +17,7 @@ public class TechManager : NetworkBehaviour
     [SerializeField] private List<TechNode> technologies = new();
     [SerializeField] private TechNode currentTechnology;
     [SerializeField] private float techPoints = 1;
-    private float researchTimer = 0;
+    [SerializeField] private float researchTimer = 0;
 
     /*public override void OnNetworkSpawn()
     {
@@ -49,7 +49,7 @@ public class TechManager : NetworkBehaviour
     {
         foreach (var tech in techTree)
         {
-            if(tech.prerequisites.Count == 0)
+            if(tech.prerequisites.Count == 0 && tech.status != TechStatus.Researched)
             {
                 tech.status = TechStatus.Available;
             }
@@ -72,6 +72,8 @@ public class TechManager : NetworkBehaviour
         ResearchTabController.Instance.DrawTechTree(technologies);
     }
 
+
+
     public void SelectTechnology(TechNode technology)
     {
         currentTechnology = technology;
@@ -85,10 +87,15 @@ public class TechManager : NetworkBehaviour
         while (researchTimer < currentTechnology.cost)
         {
             yield return wait;
-
+            
             researchTimer += techPoints;
+            ResearchTabController.Instance.UpdateTechNodeProgressBar(currentTechnology.id, researchTimer);
         }
 
-        
+        Debug.Log("R");
+        currentTechnology.status = TechStatus.Researched;
+        UpdateTechTree(technologies);
+
+        researchTimer = 0;
     }
 }

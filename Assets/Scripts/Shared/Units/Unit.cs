@@ -19,15 +19,14 @@ public abstract class Unit : NetworkBehaviour
         NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Server
     );
-    [field:SerializeField]
-    public int mapLine {protected set; get;}
-    [field:SerializeField]
-    public float moveSpeed {private set; get;} = 0.2f;
-    [field:SerializeField]
-    public float reloadSpeed {private set; get;} = 1;
-    private float reloadTimer = 0;
-    [SerializeField]
-    private float viewDistance = 3;
+    
+    [field:SerializeField] public int mapLine {protected set; get;}
+    [field:SerializeField] public float moveSpeed {private set; get;} = 0.2f;
+    [field:SerializeField] public float reloadSpeed {private set; get;} = 1;
+    protected float reloadTimer = 0;
+
+    [SerializeField] protected float viewDistance = 3;
+    [SerializeField] protected Unit currentTarget;
     public GameObject projectileObject;
     public NetworkVariable<Direction> moveDirection = new NetworkVariable<Direction>(
         Direction.Right,
@@ -72,10 +71,9 @@ public abstract class Unit : NetworkBehaviour
         SearchForDefeatZone();
         ExecuteBehavior();
         
-        reloadTimer -= Time.fixedDeltaTime; // Використовуйте fixedDeltaTime у FixedUpdate
+        reloadTimer -= Time.fixedDeltaTime;
     }
 
-    // За замовчуванням — стандартний рух та пошук
     protected virtual void ExecuteBehavior()
     {
         if (isBuilding.Value) return;
@@ -105,7 +103,21 @@ public abstract class Unit : NetworkBehaviour
         {
             var projectile = Instantiate(projectileObject, transform.position, Quaternion.identity);
             projectile.GetComponent<NetworkObject>().Spawn();
-            projectile.GetComponent<Bullet>().Initialize(team.Value, attackDirection.Value);
+
+            if (projectile.TryGetComponent<Bullet>(out Bullet bullet))
+            {
+                bullet.Initialize(team.Value, attackDirection.Value);
+            }
+            else if (projectile.TryGetComponent<ParabolicProjectile>(out ParabolicProjectile parabolic))
+            {
+                // Якщо ціль втрачена, стріляємо на максимальну дистанцію огляду
+                Vector3 targetPos = currentTarget != null ? 
+                    currentTarget.transform.position : 
+                    transform.position + ((attackDirection.Value == Direction.Right ? Vector3.right : Vector3.left) * viewDistance);
+                
+                parabolic.Initialize(team.Value, transform.position, targetPos);
+            }
+
             reloadTimer = reloadSpeed;
         }
     }
@@ -148,28 +160,33 @@ public abstract class Unit : NetworkBehaviour
     }
 
     private void SearchForEnemies()
+{
+    RaycastHit2D[] hitColliders = Physics2D.RaycastAll(transform.position, moveDirection.Value == Direction.Right ? Vector2.right : Vector2.left, viewDistance);
+    if (hitColliders.Length > 0)
     {
-        RaycastHit2D[] hitColliders = Physics2D.RaycastAll(transform.position, moveDirection.Value == Direction.Right ? Vector2.right : Vector2.left, viewDistance);
-        if (hitColliders.Length > 0)
+        foreach (var hitCollider in hitColliders)
         {
-            foreach (var hitCollider in hitColliders)
+            Unit enemyUnit = hitCollider.collider.GetComponent<Unit>();
+            if (enemyUnit != null && enemyUnit.team.Value != this.team.Value)
             {
-                Unit enemyUnit = hitCollider.collider.GetComponent<Unit>();
-                if (enemyUnit != null && enemyUnit.team.Value != this.team.Value)
-                {
-                    isFighting.Value = true;
-                    Attack();
-                    break; // Exit the loop after finding the first enemy
-                }
-                else
-                {
-                    isFighting.Value = false;
-                }
-                
+                currentTarget = enemyUnit; // Зберігаємо ціль
+                isFighting.Value = true;
+                Attack();
+                break; 
+            }
+            else
+            {
+                isFighting.Value = false;
+                currentTarget = null;
             }
         }
-
     }
+    else
+    {
+        isFighting.Value = false;
+        currentTarget = null;
+    }
+}
 
     private void SearchForBuildings()
     {

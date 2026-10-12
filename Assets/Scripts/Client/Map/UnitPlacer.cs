@@ -19,7 +19,7 @@ public class UnitPlacer : NetworkBehaviour
         }
     }*/
 
-    public void PlaceUnit(UnitType unitType)
+    public void PlaceUnit(string unitId)
     {
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             
@@ -31,11 +31,11 @@ public class UnitPlacer : NetworkBehaviour
             MapCellObject mapCellObject = hit.collider.gameObject.GetComponent<MapCellObject>();
             Debug.Log("Clicked on MapCellObject at position: " + mapCellObject.mapCell.position);
             
-            UnitsManager.Instance.PlaceUnitServerRpc(NetworkManager.Singleton.LocalClientId, mapCellObject.mapCell.position, unitType);
+            UnitsManager.Instance.PlaceUnitServerRpc(NetworkManager.Singleton.LocalClientId, mapCellObject.mapCell.position, unitId);
         }
     }
 
-    public void PlaceBuilding(string buildingID)
+    public void PlaceBuilding(string buildingId)
     {
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             
@@ -48,7 +48,7 @@ public class UnitPlacer : NetworkBehaviour
             if (hit.collider != null && hit.collider.gameObject.GetComponent<MapCellObject>() != null)
             {
                 MapCellObject mapCellObject = hit.collider.gameObject.GetComponent<MapCellObject>();
-                BuildingManager.Instance.PlaceBuildingServerRpc(NetworkManager.Singleton.LocalClientId, mapCellObject.mapCell.position, buildingID);
+                BuildingManager.Instance.PlaceBuildingServerRpc(NetworkManager.Singleton.LocalClientId, mapCellObject.mapCell.position, buildingId);
             }
         }
     }

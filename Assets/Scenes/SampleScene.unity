@@ -1230,6 +1230,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b77cd8b4ca5e22364ab88eec437a3537, type: 2}
   - {fileID: 11400000, guid: a8cddd1e3d242afda9cbfb230bd9cfe2, type: 2}
   - {fileID: 11400000, guid: c1e3fb5a9a35f20dc9b0953775935606, type: 2}
+  - {fileID: 11400000, guid: b851b523cdd1266d186635f9650a246f, type: 2}
 --- !u!114 &916697786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1456,11 +1457,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5db300cb1a3daed598cd945aeef91b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitsHotbarManager
-  <selectedUnit>k__BackingField: 0
+  <selectedUnitId>k__BackingField: 
   elements:
   - itemData: {fileID: 11400000, guid: b77cd8b4ca5e22364ab88eec437a3537, type: 2}
   - itemData: {fileID: 11400000, guid: a8cddd1e3d242afda9cbfb230bd9cfe2, type: 2}
   - itemData: {fileID: 11400000, guid: c1e3fb5a9a35f20dc9b0953775935606, type: 2}
+  - itemData: {fileID: 11400000, guid: b851b523cdd1266d186635f9650a246f, type: 2}
 --- !u!114 &1094857622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1789,6 +1791,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1f5ff0dec8b605536b8e11e09ec21b37, type: 2}
   - {fileID: 11400000, guid: b8acc01d4fbb6ed1cbecb40abd11be4c, type: 2}
   techPoints: 1
+  researchTimer: 0
 --- !u!1 &1580201723
 GameObject:
   m_ObjectHideFlags: 0
@@ -2692,7 +2695,7 @@ PanelRenderer:
   m_MaskInteraction: 0
   serializedVersion: 1
   m_PanelSettings: {fileID: 11400000, guid: 831b1c9aa15440e1285f2df5e68d3e64, type: 2}
-  sourceAsset: {fileID: 9197481963319205126, guid: 6eba8b057ab1c79898846b28a169baf4, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: c5ce0e856a24e100ca3ea6b137a59f4a, type: 3}
   m_ParentUI: {fileID: 0}
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920

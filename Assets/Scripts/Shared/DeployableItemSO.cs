@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class DeployableItemSO : ScriptableObject
 {
     [field:SerializeField]
-    public string ID {get; private set;}   
+    public string Id {get; private set;}   
     public string itemName;
     public float cost;
     public Sprite sprite;
@@ -15,7 +15,7 @@ public abstract class DeployableItemSO : ScriptableObject
     // Конкретний тип або категорія
     public ItemCategory category;
     
-    [Header("Specific Type")]
-    public UnitType unitType;       // Заповнюється, якщо це Unit
+    //[Header("Specific Type")]
+    //public UnitType unitType;       // Заповнюється, якщо це Unit
     //public BuildingType buildingType; // Заповнюється, якщо це Building
 }
